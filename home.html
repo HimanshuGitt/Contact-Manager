@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    	<link rel="stylesheet" href="bootstrap.css">
+    	<center>
+        <h1> CONTACT MANAGER </h1>
+        </center>
+        <script >
+          type="text/javascript">
+  window.addEventListener('DOMContentLoaded', function(){
+        console.log(localStorage.getItem("user"));
+        if (localStorage.getItem("user")) {
+            window.location.replace("main.html");
+        }
+    }
+);
+  function myF() {
+  var x = document.getElementById("lpassword");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+  function funLogin()
+  {
+    
+    const ID=document.getElementById("luser").value;
+    const pass=document.getElementById("lpassword").value;
+    console.log(ID+" , "+pass);
+   var url="http://localhost:8888/login-authentication/?ID="+ID+"&password="+pass;
+   
+    var xhttp = new XMLHttpRequest();
+      xhttp.onload = function() {
+      var out=this.responseText;
+      if(out=="True")
+      {
+          localStorage.setItem('user', ID);
+        window.location.replace("main.html");
+      }
+      else
+      {
+        window.alert("Wrong Credentials");
+
+      }
+    console.log(this.responseText);
+  }
+    xhttp.open( "GET", url, false ); 
+    xhttp.send();
+
+
+  }
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+function signUpFunction()
+{
+  var sEmail=document.getElementById("sEmail").value;
+  var sPassword=document.getElementById("sPassword").value;
+  var url="http://localhost:8888/signup-contact/?ID="+sEmail+"&password="+sPassword;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      var out=this.responseText;
+              window.location.replace("home.html");
+      if(out=="True")
+      {
+                window.alert("SignUp Successful. Please Login.");
+      }
+      else
+      {
+                window.alert("Already Registered Please login");
+    }
+    console.log(this.responseText);
+  }
+    xhttp.open( "POST", url, false ); 
+    xhttp.send();
+}
+        </script>
+    </head>
+    <body>
+<form>
+  <div class="page">
+    <label for="uname"><b>Email</b></label>
+    <input type="email" placeholder="Enter email" id="luser" name="uname" required>
+    <label for="psw"><b>Password (8 characters minimum)</b></label>
+    <input type="password" placeholder="Enter Password" id="lpassword" name="psw" minlength="8" required>
+          <input type="checkbox" onclick="myF()">Show Password<br><center>
+   <button onclick="funLogin()" class="login1">Login</button></center>
+</div>
+</form>
+<div class="Signup">
+    	<button onclick="document.getElementById('id01').style.display='block'">Sign up</button>
+</div>
+<div id="id01" class="dis">
+  <span onclick="document.getElementById('id01').style.display='none'"
+class="close" title="Close">&times;</span>
+<div  >
+  <form ><center>
+    <h2> New User </h2></center>
+      <label for="email" ><b> Email id </b></label>
+      <input type="email" id="sEmail" placeholder="Enter Email id " name ="email"  required >
+
+      <label for="psw"><b>Password (8 characters minimum)</b></label>
+       <input type="password" id="sPassword" placeholder="Create  Password" name="psw" minlength="8"   required><br>
+        <input type="checkbox" onclick="myFunction()">Show Password
+      <button onclick="signUpFunction()" >Sign up</button>
+      </form>
+</div>
+
+    </body>
+
+</html>

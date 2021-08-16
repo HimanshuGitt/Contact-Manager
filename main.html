@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="contactpage.css">
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
+  <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
+</head>
+<body>
+
+<h1>CONTACTS</h1>
+
+<button  onclick="document.getElementById('id02').style.display='block'" type="button" class="b">New Contact </button>
+
+<div class="div1">
+<button   type="button" onclick="logoutFunc()" class="u"> LOGOUT</button>
+</div>
+<center>
+<div id="myGrid" class="ag-theme-alpine" style="height: 500px; width:900px;"></div></center>
+
+<div id="id02" class="show">
+  <span onclick="document.getElementById('id02').style.display='none'"
+class="close" title="Close model">&times;</span>
+
+
+    
+    	<div class="in">
+    		<label class="on">First Name</label><br>
+        <input  type="text" id="firstNm" name="contactfirstname" placeholder="Enter First Name" required><br>
+        <label>Last Name</label><br>
+        <input type="text" id="lastNm" name="contactlastname" placeholder="Enter Last Name" required><br>
+        <label>Phone number</label><br>
+        <input  maxlength="10" minlength="10" id="aPhone"
+       title="Phone number of valid 10 digits"type="tel" name="contactphonenumber" placeholder="Enter phone number" required><br>
+        <label>Email</label><br>
+        <input type="Email" name="contactemail" id="aEmail" placeholder="Enter Email ID" required><br><center>
+        <button type="submit" onclick="addContactFunction()" class="new" >ADD NEW CONTACT</button></center></div>
+    	
+      
+
+</div>
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded', function(){
+        console.log(localStorage.getItem("user"));
+        if (!localStorage.getItem("user")) {
+            window.location.replace("home.html");
+        }
+        getGrid();
+    }
+);
+
+    function addContactFunction()
+    {
+        var First=document.getElementById("firstNm").value;
+        var Last=document.getElementById("lastNm").value;
+        var Ph=document.getElementById("aPhone").value;
+        var Email=document.getElementById("aEmail").value;
+        var ID=localStorage.getItem("user");
+
+        var xhttp = new XMLHttpRequest();
+
+        var url="http://localhost:8888/create-contact/?ID="+ID+"&FirstNm="+First+"&LastNm="+Last+"&Email="+Email+"&Phone="+Ph;
+        console.log(url);
+     xhttp.onload = function() {
+      var out=this.responseText;
+              window.location.replace("main.html");
+      if(out=="True")
+      {
+                window.alert("Added Contact");
+
+          
+      }
+     
+    console.log(this.responseText);
+  }
+    xhttp.open( "GET", url, false ); 
+    xhttp.send();
+
+    }
+    function getGrid()
+    {
+         var ID=localStorage.getItem("user");
+        var xhttp = new XMLHttpRequest();
+
+        var url="http://localhost:8888/fetch-data/?ID="+ID;
+        console.log(url);
+     xhttp.onload = function() {
+      var rowData=this.responseText;
+
+         const columnDefs = [
+      { field: "First Name", filter:true ,sortable: true},
+      { field: "Last Name" , filter:true,sortable: true},
+      { field: "Email", filter:true,sortable: true },
+      { field: "Phone", filter:true,sortable: true }
+    ]; 
+     rowData=JSON.parse(rowData);
+
+    const gridOptions = {
+      columnDefs: columnDefs,
+      rowData: rowData
+    };
+
+  const eGridDiv = document.querySelector('#myGrid');
+
+  new agGrid.Grid(eGridDiv, gridOptions);
+
+     
+    console.log(this.responseText);
+  }
+    xhttp.open( "GET", url, false ); 
+    xhttp.send();
+
+
+     
+    }
+    function logoutFunc()
+    {
+     localStorage.removeItem("user");
+        window.location.replace("home.html");
+    }
+</script>
+</body>
+</html>

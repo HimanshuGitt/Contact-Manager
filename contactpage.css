@@ -1,0 +1,95 @@
+
+.b {
+  text-align: center;
+  background: white;
+  border-color: white;
+  border-radius: 10px;
+  color: blue;
+  padding: 15px 32px;
+   font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.u {
+  border-color: red;
+  border-radius: 20px;
+  background: red;
+  font-weight: bold;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.div1{
+   
+   margin-top: 1px;
+    margin-right: 2px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+h1{
+  text-align: center;
+  font-size: 50px;
+}
+.show {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+  padding-top: 90px;
+}
+
+.close {
+
+  position: absolute;
+  right: 280px;
+  top: 45px;
+  color: black;
+  font-size: 40px;
+  font-weight: bold;
+}
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+
+.in {
+  border: 5px solid groove;
+  background-color: white;
+  margin: 10px auto; 
+  width: 40%;
+  padding: 10px;
+}
+
+
+
+input[type=text], input[type=tel],input[type=email] {
+  width: 100%;
+  padding: 10px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid groove ;
+  box-sizing: border-box;
+}
+
+.new {
+  background-color: lightblue;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 40%;
+  border-radius: 2px
+}
